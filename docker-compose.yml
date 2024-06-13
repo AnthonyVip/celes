@@ -1,0 +1,20 @@
+# Celes
+services:
+  celes-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: celes
+    container_name: celes
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/celes
+    networks:
+      - celes-net
+  ################ Networks ################
+networks:
+  celes-net:
+    external: true
