@@ -35,6 +35,7 @@ class GlobalConfig(BaseSettings):
     algorithm: str = os.environ.get("ALGORITHM")
     access_token_expire_minutes: int = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")  # noqa: E501
     data_path: str = os.environ.get("DATA_PATH")
+    fire_base_api_key: str = os.environ.get("FIRE_BASE_API_KEY")
 
     class Config:
         case_sensitive = True

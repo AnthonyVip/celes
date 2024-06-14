@@ -1,4 +1,10 @@
-from fastapi import APIRouter, Body, HTTPException, status
+from fastapi import (
+    APIRouter,
+    Body,
+    HTTPException,
+    status,
+    Depends
+)
 
 from schemas.celes import (
     SalesPeriodByEmployeeRequest,
@@ -11,6 +17,7 @@ from schemas.celes import (
     AvgStoreRequest
 )
 from modules.datamart import DataManager
+from decorators.auth import get_current_user
 
 router = APIRouter()
 
@@ -22,7 +29,8 @@ data_manager = DataManager()
     response_model=SalesPeriodResponse
 )
 def sales_period_by_employee(
-    request: SalesPeriodByEmployeeRequest = Body(...)
+    request: SalesPeriodByEmployeeRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_sales_by_period(
         start_date=request.start_date,
@@ -45,7 +53,8 @@ def sales_period_by_employee(
     response_model=SalesPeriodResponse
 )
 def sales_period_by_product(
-    request: SalesPeriodbyProductRequest = Body(...)
+    request: SalesPeriodbyProductRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_sales_by_period(
         start_date=request.start_date,
@@ -68,7 +77,8 @@ def sales_period_by_product(
     response_model=SalesPeriodResponse
 )
 def sales_period_by_store(
-    request: SalesPeriodbyStoreRequest = Body(...)
+    request: SalesPeriodbyStoreRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_sales_by_period(
         start_date=request.start_date,
@@ -91,7 +101,8 @@ def sales_period_by_store(
     response_model=AvgSalesResponse
 )
 def avg_sales_by_employee(
-    request: AvgEmployeeRequest = Body(...)
+    request: AvgEmployeeRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_avg_sales_by_period(
         key="KeyEmployee",
@@ -112,7 +123,8 @@ def avg_sales_by_employee(
     response_model=AvgSalesResponse
 )
 def avg_sales_by_product(
-    request: AvgProductRequest = Body(...)
+    request: AvgProductRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_avg_sales_by_period(
         key="KeyProduct",
@@ -133,7 +145,8 @@ def avg_sales_by_product(
     response_model=AvgSalesResponse
 )
 def avg_sales_by_store(
-    request: AvgStoreRequest = Body(...)
+    request: AvgStoreRequest = Body(...),
+    user: dict = Depends(get_current_user)
 ):
     response = data_manager.get_avg_sales_by_period(
         key="KeyStore",

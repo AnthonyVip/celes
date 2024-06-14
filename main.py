@@ -4,6 +4,7 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 from routes.celes import router as api_router
+from routes.auth import router as auth_router
 from routes.errors.http_error import http_error_handler
 from routes.errors.validation_error import http422_error_handler
 from core.settings import settings
@@ -39,7 +40,8 @@ def get_application() -> FastAPI:
         http422_error_handler
     )
 
-    application.include_router(api_router, prefix=settings.api_prefix)
+    application.include_router(api_router, prefix="/datamart", tags=["DataMart"])
+    application.include_router(auth_router, prefix="/users", tags=["Users"])
 
     return application
 
