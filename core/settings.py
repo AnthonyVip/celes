@@ -34,6 +34,7 @@ class GlobalConfig(BaseSettings):
     jwt_subject: str = os.environ.get("JWT_SUBJECT")
     algorithm: str = os.environ.get("ALGORITHM")
     access_token_expire_minutes: int = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")  # noqa: E501
+    data_path: str = os.environ.get("DATA_PATH")
 
     class Config:
         case_sensitive = True
