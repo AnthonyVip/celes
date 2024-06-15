@@ -47,7 +47,7 @@ jobs:
         env:
             FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > /tmp/service_account.json
+            echo '${{ toJson(secrets.FIREBASE_SERVICE_ACCOUNT) }}' > /tmp/service_account.json
             mkdir -p data
             python -c '
             import json
