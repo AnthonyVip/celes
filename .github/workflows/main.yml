@@ -25,6 +25,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry install
+
+    - name: Set environment variables
+      env:
+        SECRET_KEY:  ${{ secrets.SECRET_KEY }}
+        FIRE_BASE_API_KEY: ${{ secrets.FIRE_BASE_API_KEY }}
+        ENVIRONMENT: 'local'
+        ACCESS_TOKEN_EXPIRE_MINUTES: 60
+        DEBUG:  true
+        OPENAPI_PREFIX: ''
+        JWT_TOKEN_PREFIX:  'Bearer'
+        ALGORITHM:  'HS256'
+        JWT_SUBJECT:  'access'
+        DATA_PATH: 'data/data_chunk*.snappy.parquet'
+        EMAIL_TEST:  ${{ secrets.EMAIL_TEST }}
+        PASS_TEST:  ${{ secrets.PASS_TEST }}
+        
     
     - name: Run tests
       run: |
