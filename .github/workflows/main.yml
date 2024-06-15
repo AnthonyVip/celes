@@ -43,18 +43,21 @@ jobs:
           EMAIL_TEST: ${{ secrets.EMAIL_TEST }}
           PASS_TEST: ${{ secrets.PASS_TEST }}
 
+      - name: Decode Firebase Service Account JSON
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > /tmp/firebase_credentials.json
+
       - name: Download data files from Firebase Storage
         env:
             FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 -d > /tmp/service_account.json
             mkdir -p data
+            pip install google-cloud-storage
             python -c '
             import json
             import os
             from google.cloud import storage
   
-            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/tmp/service_account.json"
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/tmp/firebase_credentials.json"
             client = storage.Client()
             bucket = client.get_bucket("testceles-905fe.appspot.com")
             
@@ -64,6 +67,7 @@ jobs:
                     path = os.path.join("data", os.path.basename(blob.name))
                     blob.download_to_filename(path)
                     print(f"Descargado {blob.name} a {path}")
+            '
   
       - name: Run tests
         run: poetry run pytest --maxfail=1 --disable-warnings
