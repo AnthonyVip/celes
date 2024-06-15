@@ -73,7 +73,10 @@ class FactoryConfig:
 
 @lru_cache()
 def get_configuration() -> GlobalConfig:
-    return FactoryConfig(os.environ.get("ENVIRONMENT"))()
+    try:
+        return FactoryConfig(os.environ.get("ENVIRONMENT"))()
+    except KeyError:
+        return FactoryConfig("local")()
 
 
 settings = get_configuration()
