@@ -40,8 +40,16 @@ def get_application() -> FastAPI:
         http422_error_handler
     )
 
-    application.include_router(api_router, prefix="/datamart", tags=["DataMart"])
-    application.include_router(auth_router, prefix="/users", tags=["Users"])
+    application.include_router(
+        api_router,
+        prefix="/datamart",
+        tags=["DataMart"]
+    )
+    application.include_router(
+        auth_router,
+        prefix="/users",
+        tags=["Users"]
+    )
 
     return application
 

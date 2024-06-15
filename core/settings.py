@@ -36,6 +36,8 @@ class GlobalConfig(BaseSettings):
     access_token_expire_minutes: int = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")  # noqa: E501
     data_path: str = os.environ.get("DATA_PATH")
     fire_base_api_key: str = os.environ.get("FIRE_BASE_API_KEY")
+    email_test: str = os.environ.get("EMAIL_TEST")
+    pass_test: str = os.environ.get("PASS_TEST")
 
     class Config:
         case_sensitive = True

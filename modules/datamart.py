@@ -73,13 +73,3 @@ class DataManager:
             "average_sales": round(average_sales, 2),
             "total_sales": int(total_sales)
         }
-
-
-
-# # Uso del DataManager
-# if __name__ == "__main__":
-#     manager = DataManager()
-#     start_date = '2023-01-01'
-#     end_date = '2023-12-31'
-#     key_employee = '1|569'  # Asegúrate de usar el formato correcto para key_employee
-#     print(manager.get_solds_by_employee(start_date, end_date, key_employee))

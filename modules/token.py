@@ -17,12 +17,20 @@ class Token:
         expire = datetime.utcnow() + timedelta(minutes=self.expire_time)
         to_encode.update({"exp": expire})
         to_encode.update({"sub": self.subject})
-        encoded_jwt = jwt.encode(to_encode, str(self.secret_key), algorithm=self.algorithm)
+        encoded_jwt = jwt.encode(
+            to_encode,
+            str(self.secret_key),
+            algorithm=self.algorithm
+        )
         return encoded_jwt
 
     def verify_access_token(self, token: str):
         try:
-            payload = jwt.decode(token, str(self.secret_key), algorithms=[self.algorithm])
+            payload = jwt.decode(
+                token,
+                str(self.secret_key),
+                algorithms=[self.algorithm]
+            )
             return payload
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token has expired")

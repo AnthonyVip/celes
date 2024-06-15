@@ -5,6 +5,7 @@ from fastapi import (
     status,
     Depends
 )
+import requests  # noqa: F401
 
 from schemas.celes import (
     SalesPeriodByEmployeeRequest,

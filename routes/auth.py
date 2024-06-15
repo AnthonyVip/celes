@@ -25,14 +25,20 @@ async def create_user(user: UserRequest):
 
     try:
         response = requests.post(
-            url=f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={settings.fire_base_api_key}",
+            url=(
+                f"https://identitytoolkit.googleapis.com/v1/accounts"
+                f":signUp?key={settings.fire_base_api_key}"
+            ),
             headers=headers,
             data=json.dumps(body)
         )
         data = response.json()
 
         if 'error' in data:
-            raise HTTPException(status_code=400, detail=data['error']['message'])
+            raise HTTPException(
+                status_code=400,
+                detail=data['error']['message']
+            )
 
         jwt_token = token.create_access_token(
             {
@@ -60,16 +66,25 @@ async def login(user: UserRequest):
     }
 
     try:
-        url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={settings.fire_base_api_key}"
+        url = (
+            f"https://identitytoolkit.googleapis.com/v1/accounts"
+            f":signInWithPassword?key={settings.fire_base_api_key}"
+        )
         response = requests.post(url, headers=headers, data=json.dumps(body))
 
         if response.status_code != 200:
-            raise HTTPException(status_code=401, detail="Incorrect username or password")
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect username or password"
+            )
 
         user_data = response.json()
 
         if 'error' in user_data:
-            raise HTTPException(status_code=401, detail="Incorrect username or password")
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect username or password"
+            )
 
         jwt_token = token.create_access_token(
             {

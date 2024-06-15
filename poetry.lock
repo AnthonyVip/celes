@@ -293,13 +293,13 @@ dev = ["black (==22.3.0)", "hypothesis", "numpy", "pytest (>=5.30)", "pytest-xdi
 
 [[package]]
 name = "dask"
-version = "2024.5.2"
+version = "2024.6.0"
 description = "Parallel PyData with Task Scheduling"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "dask-2024.5.2-py3-none-any.whl", hash = "sha256:acc2cfe41d9e0151c216ac40396dbe34df13bc3d8c51dfece190349e4f2243af"},
-    {file = "dask-2024.5.2.tar.gz", hash = "sha256:5c9722c44d0195e78b6e54197aa3302e6fcaaac2310fd3014560bcb86253dcb3"},
+    {file = "dask-2024.6.0-py3-none-any.whl", hash = "sha256:de0ced6cd46dbc6c01120c8870457af46d667940805a4be063a74dd467466804"},
+    {file = "dask-2024.6.0.tar.gz", hash = "sha256:6882ce7e485336d707e540080ed48e01f9c09485d52a2928ea05f9a9e44bb433"},
 ]
 
 [package.dependencies]
@@ -317,22 +317,22 @@ array = ["numpy (>=1.21)"]
 complete = ["dask[array,dataframe,diagnostics,distributed]", "lz4 (>=4.3.2)", "pyarrow (>=7.0)", "pyarrow-hotfix"]
 dataframe = ["dask-expr (>=1.1,<1.2)", "dask[array]", "pandas (>=1.3)"]
 diagnostics = ["bokeh (>=2.4.2)", "jinja2 (>=2.10.3)"]
-distributed = ["distributed (==2024.5.2)"]
+distributed = ["distributed (==2024.6.0)"]
 test = ["pandas[test]", "pre-commit", "pytest", "pytest-cov", "pytest-rerunfailures", "pytest-timeout", "pytest-xdist"]
 
 [[package]]
 name = "dask-expr"
-version = "1.1.2"
+version = "1.1.3"
 description = "High Level Expressions for Dask"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "dask_expr-1.1.2-py3-none-any.whl", hash = "sha256:3be69fb2d449b5edf4404e953b7f6e688426872c6eb10f239539ead716a06f7a"},
-    {file = "dask_expr-1.1.2.tar.gz", hash = "sha256:ce2e3803b638cdc67bc75326e1b0d36ea9d231fdddf086e727145a5a2769bed4"},
+    {file = "dask_expr-1.1.3-py3-none-any.whl", hash = "sha256:e6ad2fab9ffe7dbe0fc52451b5a0dc5588f36cd5677168cfb0b73c70f05e465f"},
+    {file = "dask_expr-1.1.3.tar.gz", hash = "sha256:ce8e44dfed30b4d9e6a549d0ed8cb5798273645fb9a16733d0687dc84615a94b"},
 ]
 
 [package.dependencies]
-dask = "2024.5.2"
+dask = "2024.6.0"
 pandas = ">=2"
 pyarrow = ">=7.0.0"
 
@@ -668,6 +668,17 @@ zipp = ">=0.5"
 docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
 perf = ["ipython"]
 testing = ["flufl.flake8", "importlib-resources (>=1.3)", "jaraco.test (>=5.4)", "packaging", "pyfakefs", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy", "pytest-perf (>=0.9.2)", "pytest-ruff (>=0.2.1)"]
+
+[[package]]
+name = "iniconfig"
+version = "2.0.0"
+description = "brain-dead simple config-ini parsing"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
+    {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
+]
 
 [[package]]
 name = "jinja2"
@@ -1015,6 +1026,21 @@ toolz = "*"
 complete = ["blosc", "numpy (>=1.20.0)", "pandas (>=1.3)", "pyzmq"]
 
 [[package]]
+name = "pluggy"
+version = "1.5.0"
+description = "plugin and hook calling mechanisms for python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pluggy-1.5.0-py3-none-any.whl", hash = "sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669"},
+    {file = "pluggy-1.5.0.tar.gz", hash = "sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1"},
+]
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
+
+[[package]]
 name = "pyarrow"
 version = "16.1.0"
 description = "Python library for Apache Arrow"
@@ -1245,6 +1271,45 @@ docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
 
 [[package]]
+name = "pytest"
+version = "8.2.2"
+description = "pytest: simple powerful testing with Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pytest-8.2.2-py3-none-any.whl", hash = "sha256:c434598117762e2bd304e526244f67bf66bbd7b5d6cf22138be51ff661980343"},
+    {file = "pytest-8.2.2.tar.gz", hash = "sha256:de4bb8104e201939ccdc688b27a89a7be2079b22e2bd2b07f806b6ba71117977"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
+iniconfig = "*"
+packaging = "*"
+pluggy = ">=1.5,<2.0"
+tomli = {version = ">=1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
+
+[[package]]
+name = "pytest-mock"
+version = "3.14.0"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pytest-mock-3.14.0.tar.gz", hash = "sha256:2719255a1efeceadbc056d6bf3df3d1c5015530fb40cf347c0f9afac88410bd0"},
+    {file = "pytest_mock-3.14.0-py3-none-any.whl", hash = "sha256:0b72c38033392a5f4621342fe11e9219ac11ec9d375f8e2a0c164539e0d70f6f"},
+]
+
+[package.dependencies]
+pytest = ">=6.2.5"
+
+[package.extras]
+dev = ["pre-commit", "pytest-asyncio", "tox"]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 description = "Extensions to the standard Python datetime module"
@@ -1445,6 +1510,17 @@ anyio = ">=3.4.0,<5"
 
 [package.extras]
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7)", "pyyaml"]
+
+[[package]]
+name = "tomli"
+version = "2.0.1"
+description = "A lil' TOML parser"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
+    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
 
 [[package]]
 name = "toolz"
@@ -1856,4 +1932,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "84d981ab02deff7c5fbb05b96be1b77d4e59fb097ce2f514a95fecdc067fc4b7"
+content-hash = "9721306b645bc0545a01c7296da05b8d6f04847d29a3ffc6f5c8c44b82b3f62c"
