@@ -13,35 +13,57 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.10.12
-  
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-        - name: Set environment variables
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.12
+  
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Set environment variables
+        run: echo "Setting environment variables"
         env:
-          SECRET_KEY:  ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
           FIRE_BASE_API_KEY: ${{ secrets.FIRE_BASE_API_KEY }}
           ENVIRONMENT: 'local'
           ACCESS_TOKEN_EXPIRE_MINUTES: 60
-          DEBUG:  true
+          DEBUG: true
           OPENAPI_PREFIX: ''
-          JWT_TOKEN_PREFIX:  'Bearer'
-          ALGORITHM:  'HS256'
-          JWT_SUBJECT:  'access'
+          JWT_TOKEN_PREFIX: 'Bearer'
+          ALGORITHM: 'HS256'
+          JWT_SUBJECT: 'access'
           DATA_PATH: 'data/data_chunk*.snappy.parquet'
-          EMAIL_TEST:  ${{ secrets.EMAIL_TEST }}
-          PASS_TEST:  ${{ secrets.PASS_TEST }}
-        
-    
-    - name: Run tests
-      run: |
-        poetry run pytest --maxfail=1 --disable-warnings
+          EMAIL_TEST: ${{ secrets.EMAIL_TEST }}
+          PASS_TEST: ${{ secrets.PASS_TEST }}
+
+      - name: Download data files from Firebase Storage
+        env:
+            FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > /tmp/service_account.json
+            mkdir -p data
+            python -c '
+            import json
+            import os
+            from google.cloud import storage
+  
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/tmp/service_account.json"
+            client = storage.Client()
+            bucket = client.get_bucket("testceles-905fe.appspot.com")
+            
+            blobs = bucket.list_blobs(prefix="data/")
+            for blob in blobs:
+                if blob.name.endswith(".snappy.parquet"):
+                    path = os.path.join("data", os.path.basename(blob.name))
+                    blob.download_to_filename(path)
+                    print(f"Descargado {blob.name} a {path}")
+  
+      - name: Run tests
+        run: poetry run pytest --maxfail=1 --disable-warnings
