@@ -46,7 +46,6 @@ async def create_user(user: UserRequest):
                 "id": data["localId"]
             }
         )
-        print(f"Token: {jwt_token}")
         return UserResponse(jwt_token=jwt_token)
 
     except Exception as e:

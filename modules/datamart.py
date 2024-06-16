@@ -28,7 +28,7 @@ class DataManager:
         end_date: str,
         key: str,
         key_value: str
-    ):
+    ) -> dict:
         filtered_ddf = self.ddf[
             (self.ddf[key] == key_value) &
             (self.ddf['KeyDate'] >= start_date) &
@@ -53,7 +53,7 @@ class DataManager:
         self,
         key: str,
         key_value: str
-    ):
+    ) -> dict:
         filtered_ddf = self.ddf[
             (self.ddf[key] == key_value)
         ]

@@ -72,7 +72,7 @@ def test_login_success(mock_user_request):
         "email": mock_user_request.email,
         "password": mock_user_request.password
     }
-    print(body)
+
     response = client.post("/users/login", json=body)
 
     assert response.status_code == status.HTTP_200_OK
