@@ -68,10 +68,12 @@ def test_home():
 
 
 def test_login_success(mock_user_request):
-    response = client.post("/users/login", json={
+    body = {
         "email": mock_user_request.email,
         "password": mock_user_request.password
-    })
+    }
+    print(body)
+    response = client.post("/users/login", json=body)
 
     assert response.status_code == status.HTTP_200_OK
     assert "jwt_token" in response.json()

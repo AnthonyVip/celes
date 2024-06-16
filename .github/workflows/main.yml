@@ -83,4 +83,4 @@ jobs:
           DATA_PATH: 'data/data_chunk*.snappy.parquet'
           EMAIL_TEST: ${{ secrets.EMAIL_TEST }}
           PASS_TEST: ${{ secrets.PASS_TEST }}
-        run: poetry run pytest --maxfail=1 --disable-warnings
+        run: poetry run pytest -vv --maxfail=1 --disable-warnings
